@@ -1,0 +1,223 @@
+Answer to the question number ---1
+
+//
+Laravel query builder is a feature in the Laravel framework that offers a simple and elegant way to interact with databases.
+It provides a fluent and chainable interface for building and executing database queries.
+The query builder abstracts the database engine, allowing you to write queries without worrying about specific syntax or database differences.
+With its expressive syntax, you can easily construct complex queries by chaining methods together.
+The query builder supports various operations like joining tables, sorting, grouping, and aggregating data.
+Overall, Laravel query builder simplifies database interactions, enhances code readability, and reduces boilerplate code.
+//
+
+
+Answer to the question number ---2
+
+//
+        $posts = DB::table('posts')
+            ->select('excerpt','description')
+            ->get();
+         dd($posts);
+
+//
+
+
+Answer to the question number ---3
+
+//
+The distinct() method in Laravel's query builder is used to retrieve only unique values from a specific column or set of columns in the database query result.
+It ensures that duplicate records are eliminated, and only distinct values are returned.
+In conjunction with the select() method, distinct() is typically used to specify which columns should be considered when checking for uniqueness.
+// Example
+    $posts = DB::table('posts')
+         ->select('is_published')
+            ->distinct()
+            ->get();
+        dd($posts);
+//
+
+
+Answer to the question number ---4
+
+//
+$posts = DB::table('posts')
+           ->where('id','=','2')
+            ->first();
+         dd($posts->description);
+//
+
+
+Answer to the question number ---5
+
+//
+ $posts = DB::table('posts')
+           ->where('id','=','2')
+            ->value('description');
+         dd($posts);
+//
+
+
+Answer to the question number ---6
+
+//
+The first() method retrieves the first record that matches the query criteria.
+ It is typically used when you want to retrieve the earliest or oldest record based on a specific sorting order.
+On the other hand, the find() method retrieves a record by its primary key.
+ It expects the primary key value as an argument and fetches the corresponding record from the database.
+ //
+
+
+ Answer to the question number ---7
+
+ //
+         $posts = DB::table('posts')
+            ->select('title')
+             ->get();
+         dd($posts);
+//
+
+
+
+ Answer to the question number ---8
+
+ //
+  $posts = DB::table('posts')
+            ->insert([
+                'user_id'      => 1,
+                'title'        => 'X',
+                'slug'         => 'x',
+                'excerpt'      => 'excerpt',
+                'description'  => 'description',
+                'is_published' => true,
+                'min_to_read'  => 2,
+            ]);
+         dd($posts);
+//
+
+
+
+ Answer to the question number ---9
+
+//
+   $posts = DB::table('posts')
+          ->where('id','=','2')
+            ->update([
+                'excerpt'     => 'Laravel 10',
+                'description' => 'Laravel 10'
+            ]);
+        dd($posts);
+//
+
+
+
+Answer to the question number ---10
+
+//
+ $posts = DB::table('posts')
+          ->where('id','=','3')
+            ->delete();
+        dd($posts);
+//
+
+
+Answer to the question number ---11
+
+//
+The purpose and usage of aggregate methods in Laravel query builder are as follows:
+
+---First
+count(): It returns the number of rows that match the specified query conditions.
+// Example
+  $posts = DB::table('posts')
+         ->count();
+        return $posts;
+
+---second
+sum(): It calculates the sum of a specific column's values in the result set.
+// Example
+ $posts = DB::table('posts')
+         ->sum('min_to_read');
+        return $posts;
+
+---third
+avg(): It calculates the average of a specific column's values in the result set.
+// Example
+  $posts = DB::table('posts')
+         ->avg('min_to_read');
+        return $posts;
+
+---four
+max(): It retrieves the maximum value of a specific column in the result set.
+// Example
+ $posts = DB::table('posts')
+         ->max('min_to_read');
+        return $posts;
+
+---five
+min(): It retrieves the minimum value of a specific column in the result set.
+// Example
+ $posts = DB::table('posts')
+         ->min('min_to_read');
+        return $posts;
+
+
+
+Answer to the question number ---12
+
+The whereNot() method in Laravel query builder is used to add a not equal to condition to the query.
+ It filters rows where a specific column's value is different from the given value.
+ //Example
+   $posts = DB::table('posts')
+          ->whereNot('min_to_read','=',5);
+         return $posts;
+
+
+
+Answer to the question number ---13
+
+//
+The difference between the exists() and doesntExist() methods in Laravel's query builder is as follows:
+1.exists(): It checks if the query has any results.
+If there are matching records in the database, the method returns true; otherwise, it returns false.
+
+//Example
+
+ if (DB::table('posts')->where('id','=','2')->exists()){
+           echo "We found this record in Database";
+}else{
+echo "Sorry we not found this record in Database";
+       }
+
+
+2.doesntExist(): It is the opposite of exists(). It checks if the query does not have any results.
+If there are no matching records in the database, the method returns true; otherwise, it returns false.
+
+//Example
+
+if (DB::table('posts')->where('id','=','10')->doesntExist()){
+           echo "Woohoo, I found a match";
+       }else{
+           echo "Ahh, I have not found a match";
+}
+
+In summary, exists() returns true when records are found, while doesntExist() returns true when no records are found.
+
+
+
+Answer to the question number ---14
+
+//
+  $posts =  DB::table('posts')
+         ->whereBetween('min_to_read',[1,5])
+         ->get();
+     dd($posts);
+//
+
+
+Answer to the question number ---15
+
+//
+  $posts =  DB::table('posts')
+         ->where('id','=','3')
+         ->increment('min_to_read');
+      dd($posts);
+//
